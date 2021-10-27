@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      525 字
+      521 字
     </span>
   
 
@@ -266,9 +266,11 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="Linux学习笔记"><a href="#Linux学习笔记" class="headerlink" title="Linux学习笔记"></a>Linux学习笔记</h1><p>[TOC]</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="权限相关"><a href="#权限相关" class="headerlink" title="权限相关"></a>权限相关</h3><p><strong>Linux的rwx权限：</strong></p>
-<div class="table-container">
+              <h1 id="linux学习笔记"><a class="markdownIt-Anchor" href="#linux学习笔记"></a> Linux学习笔记</h1>
+<p>[TOC]</p>
+<h2 id="命令"><a class="markdownIt-Anchor" href="#命令"></a> 命令</h2>
+<h3 id="权限相关"><a class="markdownIt-Anchor" href="#权限相关"></a> 权限相关</h3>
+<p><strong>Linux的rwx权限：</strong></p>
 <table>
 <thead>
 <tr>
@@ -287,19 +289,22 @@
 </tr>
 </tbody>
 </table>
-</div>
 <blockquote>
 <ol>
-<li>文件夹(d)、普通文件(-)、链接(l)、块设备文件(b)、管道文件(p)、字符设备文件(c)、套接口文件(s)</li>
+<li>文件夹(d)、普通文件(-)、链接(l)、块设备文件(b)、管道文件§、字符设备文件©、套接口文件(s)</li>
 <li>r：read、w：write、x：excute</li>
 </ol>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ls -l   <span class="hljs-comment">#列出当前文件夹下所有文件等的权限</span><br><span class="hljs-comment">#out -&gt; drwxrwxr-x 2 mcfly mcfly 4096 10月 22 21:37 new</span><br>sudo chmod 271 xxx   <span class="hljs-comment">#以八进制设置xxx的三组权限</span><br></code></pre></td></tr></table></figure>
-<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">pwd</span>				<span class="hljs-comment">#打印当前工作目录</span><br>mkdir			<span class="hljs-comment">#建立文件夹</span><br>touch			<span class="hljs-comment">#建立空白文件</span><br>rm				<span class="hljs-comment">#删除文件，-r参数删除文件夹，-rf以递归的方式删除文件夹及其文件</span><br>chmod			<span class="hljs-comment">#文件权限修改命令</span><br>find -name xxx	<span class="hljs-comment">#查找文件</span><br>mv				<span class="hljs-comment">#移动文件或修改文件名</span><br>ctrl c          <span class="hljs-comment">#结束当前进程</span><br></code></pre></td></tr></table></figure>
+<h3 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">pwd</span>				<span class="hljs-comment">#打印当前工作目录</span><br>mkdir			<span class="hljs-comment">#建立文件夹</span><br>touch			<span class="hljs-comment">#建立空白文件</span><br>rm				<span class="hljs-comment">#删除文件，-r参数删除文件夹，-rf以递归的方式删除文件夹及其文件</span><br>chmod			<span class="hljs-comment">#文件权限修改命令</span><br>find -name xxx	<span class="hljs-comment">#查找文件</span><br>mv				<span class="hljs-comment">#移动文件或修改文件名</span><br>ctrl c          <span class="hljs-comment">#结束当前进程</span><br></code></pre></td></tr></table></figure>
 <hr>
-<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>基于TCP/IP，可靠。</p>
+<h2 id="ftp"><a class="markdownIt-Anchor" href="#ftp"></a> FTP</h2>
+<h3 id="特性"><a class="markdownIt-Anchor" href="#特性"></a> 特性</h3>
+<p>基于TCP/IP，可靠。</p>
 <p>FTP使用两个端口号，21口为命令端口，20端口为数据传输端口。</p>
-<h3 id="Linux下架设"><a href="#Linux下架设" class="headerlink" title="Linux下架设"></a>Linux下架设</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install vsftpd<br>sudo vim /etc/vsftpd.conf	<span class="hljs-comment">#修改配置</span><br>sudo /etc/init.d/vsftpd restart		<span class="hljs-comment">#启动</span><br></code></pre></td></tr></table></figure>
+<h3 id="linux下架设"><a class="markdownIt-Anchor" href="#linux下架设"></a> Linux下架设</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install vsftpd<br>sudo vim /etc/vsftpd.conf	<span class="hljs-comment">#修改配置</span><br>sudo /etc/init.d/vsftpd restart		<span class="hljs-comment">#启动</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
