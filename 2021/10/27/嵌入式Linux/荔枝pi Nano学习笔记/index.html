@@ -275,7 +275,6 @@
 <p>关于u-boot分支的选择，官方给出的是<code>git checkout nano-lcd800480</code>，按照教程配置的屏幕细节，但我实际用480-272的屏幕测试时发现先是一个荔枝的图标的一部分，然后各种花屏，最后也没有企鹅图标和基本信息。最致命的是输入<code>bdinfo</code>和<code>printenv</code>指令提示不识别。后来参考:</p>
 <p>发现他用的分支是<code>nano-v2018.01</code>，我按照另一个教程在u-boot控制台输入:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">sf probe 0<br>sf erase 0 0x100000<br>reset<br></code></pre></td></tr></table></figure>
-
 <p>擦除了spi flash，重新烧录了分支<code>nano-v2018.01</code>出现了和傻瓜包一样的界面，说明应该是成功了，此时我的TF卡已经烧录了linux系统，插上去试了试，可以进系统，成功了。因为后期我们还要倒腾，所以u-boot和linux我们都要从傻瓜包过渡到自己编译烧录的程序。</p>
 <blockquote>
 <p>期间有个有意思的现象，官方教程选择的分支<code>nano-lcd800480</code>里面关于LCD的很多配置已经写好了，但是官方教程有很多关于配置LCD的细节。网友选择的<code>nano-v2018.01</code>分支则需要按照教程手动配置，所以估计原来官方用的就是<code>nano-v2018.01</code>，只是后来不知道为什么改成了<code>nano-lcd800480</code>而且没有仔细测试。</p>
@@ -312,16 +311,12 @@
 <p>由于我的卡之前刷了傻瓜包，看样子是要进行一定操作了</p>
 <p>附我的卡的信息:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh">Disk /dev/sdb：14.86 GiB，15931539456 字节，31116288 个扇区<br>Disk model: SD/MMC/MS PRO   <br>单元：扇区 / 1 * 512 = 512 字节<br>扇区大小(逻辑/物理)：512 字节 / 512 字节<br>I/O 大小(最小/最佳)：512 字节 / 512 字节<br>磁盘标签类型：dos<br>磁盘标识符：0x5f57945f<br><br>设备       启动  起点   末尾   扇区  大小 Id 类型<br>/dev/sdb1        2048  34815  32768   16M  c W95 FAT32 (LBA)<br>/dev/sdb2       34816 409599 374784  183M 83 Linux<br></code></pre></td></tr></table></figure>
-
-<p>官方推荐参考 <a target="_blank" rel="noopener" href="https://github.com/Zepan/ilichee/tree/master/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6/%E9%95%9C%E5%83%8F%E7%83%A7%E5%86%99">https://github.com/Zepan/ilichee/tree/master/资源文件/镜像烧写</a> 的内容，里面有具体操作</p>
+<p>官方推荐参考 <a target="_blank" rel="noopener" href="https://github.com/Zepan/ilichee/tree/master/资源文件/镜像烧写">https://github.com/Zepan/ilichee/tree/master/资源文件/镜像烧写</a> 的内容，里面有具体操作</p>
 <p><em>我使用后发现，这个<code>fdisk</code>明令有较多提示，大家可以放心食用</em></p>
 <blockquote>
 <p>为了方便，这里贴上删除分区和创建分区的示例操作(来自官方github)</p>
 <p>删除</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span><br>sudo fdisk /dev/sdb&lt;&lt;<span class="hljs-string">EOF</span><br><span class="hljs-string">d</span><br><span class="hljs-string">1</span><br><span class="hljs-string">d</span><br><span class="hljs-string">2</span><br><span class="hljs-string">d</span><br><span class="hljs-string">3</span><br><span class="hljs-string">d</span><br><span class="hljs-string">4</span><br><span class="hljs-string">w</span><br><span class="hljs-string">p</span><br><span class="hljs-string">q</span><br><span class="hljs-string">EOF</span><br></code></pre></td></tr></table></figure>
-
-
-
 <p>创建</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo fdisk /dev/sdb &lt;&lt;<span class="hljs-string">EOF</span><br><span class="hljs-string">n</span><br><span class="hljs-string">p</span><br><span class="hljs-string">1</span><br><span class="hljs-string">+16M</span><br><span class="hljs-string">n</span><br><span class="hljs-string">p</span><br><span class="hljs-string">2</span><br><span class="hljs-string">p</span><br><span class="hljs-string">w</span><br><span class="hljs-string">q</span><br><span class="hljs-string">EOF</span><br></code></pre></td></tr></table></figure>
 </blockquote>

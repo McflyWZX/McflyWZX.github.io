@@ -34,16 +34,16 @@
 <meta property="og:site_name" content="Mcfly的个人站">
 <meta property="og:description" content="使用矩阵分解和SGD实现一个经典的推荐系统，该系统根据目标用户的影评（评分）情况来为他推荐他可能喜欢的电影。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mcflywzx.github.io/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F%5CMSE.svg">
-<meta property="og:image" content="https://mcflywzx.github.io/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/MSE5.svg">
-<meta property="og:image" content="https://mcflywzx.github.io/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/MSE10.svg">
-<meta property="og:image" content="https://mcflywzx.github.io/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/MSE1.svg">
+<meta property="og:image" content="https://mcflywzx.github.io/.io//MSE.svg">
+<meta property="og:image" content="https://mcflywzx.github.io/.io//MSE5.svg">
+<meta property="og:image" content="https://mcflywzx.github.io/.io//MSE10.svg">
+<meta property="og:image" content="https://mcflywzx.github.io/.io//MSE1.svg">
 <meta property="article:published_time" content="2021-10-27T14:30:38.000Z">
 <meta property="article:modified_time" content="2021-10-27T15:54:47.329Z">
 <meta property="article:author" content="Mcfly">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://mcflywzx.github.io/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F%5CMSE.svg">
+<meta name="twitter:image" content="https://mcflywzx.github.io/.io//MSE.svg">
   
   <title>协同过滤与矩阵分解过滤系统 - Mcfly的个人站</title>
 
@@ -216,7 +216,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      6.1k 字
     </span>
   
 
@@ -278,34 +278,38 @@
 <h3 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h3><p>矩阵分解的核心思想是将矩阵$r$分解成两个矩阵的乘积$p \times q^T$，其中$p$为用户矩阵，大小为$User \times k$；$q$为物品矩阵，大小为$Item \times k$，其中，$k$为隐因子，我个人的理解就是用户之间、物品之间差异的表示。这样一来我们就将原来的平方空间复杂度转化成了线性空间复杂度，而且最为关键的，现在我们有了每个用户对所有物品评价的数据的近似值，有了这些数据，我们就能很方便的进行推荐了。</p>
 <p>但是一般来讲我们是无法直接得到$p \times q^T = \hat{r} = r$矩阵，我们只能对原数据进行拟合，使得$\hat{r}$在已有的数据集上尽可能地接近$r$。这里我们使用<code>SGD</code>算法进行拟合。</p>
 <p>同时我们注意到对不同的用户，有些可能会偏好打低分，而有些喜欢打高分，对不同的物品也是如此，我们必须减去这些影响才能得到用户之间、物品之间的差距。</p>
-<p>$$<br>    \hat{r}<em>{ui} = \mu + b_u + b_i + p_u  q_i^T\<br>    err = r</em>{ui} - \hat{r}<em>{ui}\<br>    为了防止过拟合，加入正则项\<br>    MSE = \sum</em>{(u,i) \in K} (r_{ui} - \hat{r}<em>{ui})^2 + \alpha (||b_u||^2 + ||b_i||^2 + ||p_u||^2   + ||q_i||^2)\<br>    应用SGD算法，对MSE中的各个变量求偏导\<br>    b_u’ += 2<em>err-2\alpha b_u\<br>    b_i’ += 2</em>err-2\alpha b_i\<br>    p_u’ += 2<em>err</em>q_i-2\alpha p_u\<br>    q_i’ += 2<em>err</em>p_u-2\alpha q_i\<br>    注意这里p_u’、q_i’的更新不存在维度问题，p:n</em>{user}\times k、q:n_{item}\times k\<br>    p_u:1\times k、q_i:1\times k<br>$$</p>
-<hr>
+<script type="math/tex; mode=display">
+    \hat{r}_{ui} = \mu + b_u + b_i + p_u  q_i^T\\
+    err = r_{ui} - \hat{r}_{ui}\\
+    为了防止过拟合，加入正则项\\
+    MSE = \sum_{(u,i) \in K} (r_{ui} - \hat{r}_{ui})^2 + \alpha (||b_u||^2 + ||b_i||^2 + ||p_u||^2   + ||q_i||^2)\\
+    应用SGD算法，对MSE中的各个变量求偏导\\
+    b_u' += 2*err-2\alpha b_u\\
+    b_i' += 2*err-2\alpha b_i\\
+    p_u' += 2*err*q_i-2\alpha p_u\\
+    q_i' += 2*err*p_u-2\alpha q_i\\
+    注意这里p_u'、q_i'的更新不存在维度问题，p:n_{user}\times k、q:n_{item}\times k\\
+    p_u:1\times k、q_i:1\times k</script><hr>
 <h2 id="实验数据"><a href="#实验数据" class="headerlink" title="实验数据"></a>实验数据</h2><p>输入：影评字典</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python">critics = &#123;<span class="hljs-string">&#x27;Lisa Rose&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Lady in the Water&#x27;</span>: <span class="hljs-number">2.5</span>, <span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">3.5</span>,<br>            <span class="hljs-string">&#x27;Just My Luck&#x27;</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">3.5</span>, <span class="hljs-string">&#x27;You, Me and Dupree&#x27;</span>: <span class="hljs-number">2.5</span>,<br>            <span class="hljs-string">&#x27;The Night Listener&#x27;</span>: <span class="hljs-number">3.0</span>&#125;,<br>           <span class="hljs-string">&#x27;Gene Seymour&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Lady in the Water&#x27;</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">3.5</span>,<br>            <span class="hljs-string">&#x27;Just My Luck&#x27;</span>: <span class="hljs-number">1.5</span>, <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">5.0</span>, <span class="hljs-string">&#x27;The Night Listener&#x27;</span>: <span class="hljs-number">3.0</span>,<br>            <span class="hljs-string">&#x27;You, Me and Dupree&#x27;</span>: <span class="hljs-number">3.5</span>&#125;,<br>           <span class="hljs-string">&#x27;Michael Phillips&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Lady in the Water&#x27;</span>: <span class="hljs-number">2.5</span>, <span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">3.0</span>,<br>            <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">3.5</span>, <span class="hljs-string">&#x27;The Night Listener&#x27;</span>: <span class="hljs-number">4.0</span>&#125;,<br>           <span class="hljs-string">&#x27;Claudia Puig&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">3.5</span>, <span class="hljs-string">&#x27;Just My Luck&#x27;</span>: <span class="hljs-number">3.0</span>,<br>            <span class="hljs-string">&#x27;The Night Listener&#x27;</span>: <span class="hljs-number">4.5</span>, <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">4.0</span>,<br>            <span class="hljs-string">&#x27;You, Me and Dupree&#x27;</span>: <span class="hljs-number">2.5</span>&#125;,<br>           <span class="hljs-string">&#x27;Mick LaSalle&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Lady in the Water&#x27;</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">4.0</span>,<br>            <span class="hljs-string">&#x27;Just My Luck&#x27;</span>: <span class="hljs-number">2.0</span>, <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">&#x27;The Night Listener&#x27;</span>: <span class="hljs-number">3.0</span>,<br>            <span class="hljs-string">&#x27;You, Me and Dupree&#x27;</span>: <span class="hljs-number">2.0</span>&#125;,<br>           <span class="hljs-string">&#x27;Jack Matthews&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Lady in the Water&#x27;</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">4.0</span>,<br>            <span class="hljs-string">&#x27;The Night Listener&#x27;</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">5.0</span>, <span class="hljs-string">&#x27;You, Me and Dupree&#x27;</span>: <span class="hljs-number">3.5</span>&#125;,<br>           <span class="hljs-string">&#x27;Toby&#x27;</span>: <br>           &#123;<span class="hljs-string">&#x27;Snakes on a Plane&#x27;</span>: <span class="hljs-number">4.5</span>, <span class="hljs-string">&#x27;You, Me and Dupree&#x27;</span>: <span class="hljs-number">1.0</span>, <span class="hljs-string">&#x27;Superman Returns&#x27;</span>: <span class="hljs-number">4.0</span>&#125;&#125;<br></code></pre></td></tr></table></figure>
-
 <p>目标，为Toby进行推荐。</p>
 <p>我们进行模块化设计，以下为矩阵分解推荐系统的代码：</p>
 <p>首先我们对要用的变量进行初始化:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, k</span>):</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    :param k: 隐因子数量</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    self.k = k<br>    self.Pu = np.random.random(size=(<span class="hljs-number">1</span>, k))<br>    self.Qi = np.random.random(size=(<span class="hljs-number">1</span>, k))<br>    self.Bu = np.random.random(<span class="hljs-number">1</span>)<br>    self.Bi = np.random.random(<span class="hljs-number">1</span>)<br>    self.Users = []<br>    self.Items = []<br>    self.userItemDic = &#123;&#125;<br>    self.sampleSet = np.array([])<br>    self.mu = <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
-
 <p>定义添加数据集的函数，为了能多次添加数据，我们每次都会更新模型参数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addUserItemDic</span>(<span class="hljs-params">self, UIDic: <span class="hljs-built_in">dict</span></span>):</span><br>    <span class="hljs-comment"># 先将训练集变回list，方便append数据</span><br>    self.sampleSet = <span class="hljs-built_in">list</span>(self.sampleSet)<br>    <span class="hljs-keyword">for</span> user <span class="hljs-keyword">in</span> UIDic.keys():<br>        <span class="hljs-keyword">if</span> user <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self.userItemDic.keys():<br>            self.userItemDic[user] = &#123;&#125;<br>            self.Users.append(user)<br>        <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> UIDic[user]:<br>            <span class="hljs-keyword">if</span> item <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self.userItemDic[user].keys():<br>                self.userItemDic[user][item] = UIDic[user][item]<br>                self.Items.append(item)<br>            self.sampleSet.append((user, item, UIDic[user][item]))<br>    <span class="hljs-comment"># 将训练集变回np数组，方便使用fancy index</span><br>    self.sampleSet = np.array(self.sampleSet)<br>    <span class="hljs-comment"># 更新总体均值</span><br>    self.mu = <span class="hljs-number">0</span><br>    userMeanScore = []<br>    <span class="hljs-keyword">for</span> user <span class="hljs-keyword">in</span> self.userItemDic.keys():<br>        userMeanScore.append(np.mean(<span class="hljs-built_in">list</span>(self.userItemDic[user].values())))<br>    self.mu = np.mean(userMeanScore)<br>    <span class="hljs-comment"># 使用set来清除重复项，方便后续做索引</span><br>    self.Users = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(self.Users))<br>    self.Items = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(self.Items))<br>    <span class="hljs-comment"># 更新其它基本参数</span><br>    self.Pu = np.random.random(size=(<span class="hljs-built_in">len</span>(self.Users), self.k))<br>    self.Qi = np.random.random(size=(<span class="hljs-built_in">len</span>(self.Items), self.k))<br>    self.Bu = np.random.random(<span class="hljs-built_in">len</span>(self.Users))<br>    self.Bi = np.random.random(<span class="hljs-built_in">len</span>(self.Items))<br></code></pre></td></tr></table></figure>
-
 <p>定义预测函数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pred</span>(<span class="hljs-params">self, user, item</span>):</span><br>    iUser, iItem = self.Users.index(user), self.Items.index(item)<br>    <span class="hljs-keyword">return</span> np.<span class="hljs-built_in">float</span>(self.mu + self.Bu[iUser] + self.Bi[iItem] + 	self.Pu[iUser].dot(self.Qi[iItem].T))<br></code></pre></td></tr></table></figure>
-
 <p>使用SGD的训练函数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">self, epoch=<span class="hljs-number">5</span>, n=<span class="hljs-number">100</span>, trainTestRate=<span class="hljs-number">0.8</span>, lr=<span class="hljs-number">0.1</span>, alpha=<span class="hljs-number">0.1</span></span>):</span><br>    trainMSEs = []<br>    testMSEs = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epoch):<br>        <span class="hljs-comment"># 按比例随机抽取样本集与数据集</span><br>        numOfTrain = <span class="hljs-built_in">int</span>(trainTestRate * self.sampleSet.shape[<span class="hljs-number">0</span>])<br>        randomIndexSampleSet = np.random.choice(self.sampleSet.shape[<span class="hljs-number">0</span>], self.sampleSet.shape[<span class="hljs-number">0</span>], replace=<span class="hljs-literal">False</span>)<br>        trainSet = self.sampleSet[randomIndexSampleSet[:numOfTrain]]<br>        testSet = self.sampleSet[randomIndexSampleSet[numOfTrain:]]<br>        MSE = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> user, item, score <span class="hljs-keyword">in</span> trainSet:<br>            err = <span class="hljs-built_in">float</span>(score) - self.pred(user, item)<br>            MSE += err ** <span class="hljs-number">2</span><br>            iUser, iItem = self.Users.index(user), self.Items.index(item)<br>            self.Bu[iUser] += lr * (err - alpha * self.Bu[iUser])<br>            self.Bi[iItem] += lr * (err - alpha * self.Bi[iItem])<br>            self.Pu[iUser] += lr * (err * self.Qi[iItem] - alpha * self.Pu[iUser])<br>            self.Qi[iItem] += lr * (err * self.Pu[iUser] - alpha * self.Qi[iItem])<br>        testMSE = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> user, item, score <span class="hljs-keyword">in</span> testSet:<br>            err = <span class="hljs-built_in">float</span>(score) - self.pred(user, item)<br>            testMSE += err ** <span class="hljs-number">2</span><br>        MSE /= numOfTrain<br>        testMSE /= (self.sampleSet.shape[<span class="hljs-number">0</span>] - numOfTrain)<br>        trainMSEs.append(MSE)<br>        testMSEs.append(testMSE)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;epoch:%d\tMSE:%f\t testMSE:%f&#x27;</span> % (i, MSE, testMSE))<br>    <span class="hljs-keyword">return</span> trainMSEs, testMSEs<br></code></pre></td></tr></table></figure>
-
 <p>最后，定义推荐函数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recommend</span>(<span class="hljs-params">self, user</span>):</span><br>    items = []<br>    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> self.Items:<br>        items.append((item, self.pred(user, item)))<br>    items = <span class="hljs-built_in">sorted</span>(items, key=<span class="hljs-keyword">lambda</span> d: d[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">return</span> items<br></code></pre></td></tr></table></figure>
-
 <p>以上就是推荐系统的全部定义，下面我们来测试推荐系统性能：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">movieRecommend = RecommendSys(k=<span class="hljs-number">3</span>)<br>movieRecommend.addUserItemDic(critics)<br>trainMse, testMse = movieRecommend.train(epoch=<span class="hljs-number">100</span>, n=<span class="hljs-number">20</span>, trainTestRate=<span class="hljs-number">0.7</span>)<br><span class="hljs-built_in">print</span>(movieRecommend.recommend(<span class="hljs-string">&#x27;Toby&#x27;</span>))<br>plt.plot(trainMse, c=<span class="hljs-string">&#x27;r&#x27;</span>, label=<span class="hljs-string">&#x27;TrainMse&#x27;</span>)<br>plt.plot(testMse, c=<span class="hljs-string">&#x27;b&#x27;</span>, label=<span class="hljs-string">&#x27;TestMse&#x27;</span>)<br>plt.legend()<br>plt.show()<br></code></pre></td></tr></table></figure>
-
 <p>在<code>k=3、epoch=100、n=20、trainTestRate=0.7</code>的条件下我们得到了如下结果：</p>
-<p><img src="/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F%5CMSE.svg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/.io//MSE.svg" srcset="/img/loading.gif" lazyload alt></p>
 <p>得到的Toby推荐评分矩阵为：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -313,7 +317,8 @@
 <th>4.369445</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Superman Returns</td>
 <td>3.865079</td>
 </tr>
@@ -333,24 +338,30 @@
 <td>You, Me and Dupree</td>
 <td>1.211615</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>我们继续在不同k的情况下继续实验：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">k = 5</th>
-<th align="center"><img src="/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/MSE5.svg" srcset="/img/loading.gif" lazyload style="zoom:50%;"></th>
+<th style="text-align:center">k = 5</th>
+<th style="text-align:center"><img src="/.io//MSE5.svg" srcset="/img/loading.gif" lazyload style="zoom:50%;"></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">k = 10</td>
-<td align="center"><img src="/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/MSE10.svg" srcset="/img/loading.gif" lazyload style="zoom:50%;"></td>
+<tbody>
+<tr>
+<td style="text-align:center">k = 10</td>
+<td style="text-align:center"><img src="/.io//MSE10.svg" srcset="/img/loading.gif" lazyload style="zoom:50%;"></td>
 </tr>
 <tr>
-<td align="center">k = 1</td>
-<td align="center"><img src="/2021/10/27/ML/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/MSE1.svg" srcset="/img/loading.gif" lazyload style="zoom:50%;"></td>
+<td style="text-align:center">k = 1</td>
+<td style="text-align:center"><img src="/.io//MSE1.svg" srcset="/img/loading.gif" lazyload style="zoom:50%;"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>显然k越大数据变化越稳定，但是模型占据的空间就更大了，且模型更容易过拟合。</p>
 
             </div>
@@ -383,8 +394,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/27/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E8%BF%87%E6%BB%A4%E7%B3%BB%E7%BB%9F/">
-                        <span class="hidden-mobile">协同过滤与矩阵分解过滤系统</span>
+                      <a href="/2021/10/27/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Linux学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
