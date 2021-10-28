@@ -8,7 +8,7 @@
     <link href="/2021/10/28/PCB/AD%E5%BA%93%E8%BD%ACKiCAD%E5%BA%93%E6%95%99%E7%A8%8B/"/>
     <url>/2021/10/28/PCB/AD%E5%BA%93%E8%BD%ACKiCAD%E5%BA%93%E6%95%99%E7%A8%8B/</url>
     
-    <content type="html"><![CDATA[<p>最近需要使用KiCAD画大型板子，封装库成为第一道拦路虎，正好积累了不少AD库，AD转KiCAD参考<a href="https://www.cnblogs.com/zhiqiang_zhang/p/11107818.html">AD转换为KiCAD的方法</a>，这里介绍地非常详细，我就不多说了。</p><p>LCEDA的话，首先是PCB库，先新建一个PCB文件，放置你需要的封装，然后点击文件导出到AD，然后遵照上面的来做就可以了。</p>]]></content>
+    <content type="html"><![CDATA[<p>最近需要使用KiCAD画大型板子，封装库成为第一道拦路虎，正好积累了不少AD库，AD转KiCAD参考<a href="https://www.cnblogs.com/zhiqiang_zhang/p/11107818.html">AD转换为KiCAD的方法</a>，这里介绍地非常详细，我就不多说了。</p><p>LCEDA的话，首先是PCB库，先新建一个PCB文件，放置你需要的封装，然后点击文件导出到AD，然后遵照上面的来做就可以了。这里还有一个视频演示：<a href="https://www.bilibili.com/video/BV1sf4y1X7SC?from=search&amp;seid=17094394640716498204&amp;spm_id_from=333.337.0.0">KiCAD白嫖立创EDA的封装（无需运行任何脚本，不丢丝印）_哔哩哔哩_bilibili</a></p>]]></content>
     
     
     <categories>
