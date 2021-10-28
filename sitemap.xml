@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mcflywzx.github.io/about/index.html</loc>
+    
+    <lastmod>2021-10-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://mcflywzx.github.io/2021/10/28/ML/KMeans-EM%E8%81%9A%E7%B1%BB/</loc>
     
     <lastmod>2021-10-28</lastmod>
@@ -38,20 +45,6 @@
   
   <url>
     <loc>https://mcflywzx.github.io/2021/10/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    
-    <lastmod>2021-10-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mcflywzx.github.io/about/index-1.html</loc>
-    
-    <lastmod>2021-10-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mcflywzx.github.io/about/index.html</loc>
     
     <lastmod>2021-10-27</lastmod>
     
