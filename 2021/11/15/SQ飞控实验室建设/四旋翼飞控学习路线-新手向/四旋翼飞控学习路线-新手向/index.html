@@ -28,20 +28,23 @@
   <meta name="description" content="">
   <meta name="author" content="Mcfly">
   <meta name="keywords" content="嵌入式, DIY, 算法">
-  <meta name="description" content="快速操作  快速放置递增网络标签 L放置网络标签 →\to→ insert按一定规则重复上次操作  差分网络 网络标签加上后缀_N和_P即可  快捷键  原理图    快捷键 功能     a 可以添加元器件符号，第一次会加载符号库   c 复制符号   w 添加连线，将器件引脚连接   v 可以给器件添加值，比如电阻阻值，电容容值等   p 可以打开电源选择窗口，选择并添加电源符号   g 可">
+  <meta name="description" content="四旋翼飞控学习路线-新手向   初识飞控 四旋翼飞控的核心是对控制算法的编程实现以及调试，飞控的基本目的是在无人介入的情况下控制四个电机的输出从而保持飞行器的稳定飞行。它有着以下特点：  **门槛极高：**准确的说飞控并不适合新手（指什么都不会）用来入门，在新手尝试的过程中出现各种各样奇怪的问题是不可避免的，而底层飞控系统的容错性近乎为0，即一出问题几乎不可避免的要炸鸡。轻则设备报废，重则血肉模">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KiCAD使用小技巧">
-<meta property="og:url" content="https://mcflywzx.github.io/2021/10/29/PCB/KiCAD%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:title" content="四旋翼飞控学习路线-新手向">
+<meta property="og:url" content="https://mcflywzx.github.io/2021/11/15/SQ%E9%A3%9E%E6%8E%A7%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%BB%BA%E8%AE%BE/%E5%9B%9B%E6%97%8B%E7%BF%BC%E9%A3%9E%E6%8E%A7%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF-%E6%96%B0%E6%89%8B%E5%90%91/%E5%9B%9B%E6%97%8B%E7%BF%BC%E9%A3%9E%E6%8E%A7%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF-%E6%96%B0%E6%89%8B%E5%90%91/index.html">
 <meta property="og:site_name" content="Mcfly的个人站">
-<meta property="og:description" content="快速操作  快速放置递增网络标签 L放置网络标签 →\to→ insert按一定规则重复上次操作  差分网络 网络标签加上后缀_N和_P即可  快捷键  原理图    快捷键 功能     a 可以添加元器件符号，第一次会加载符号库   c 复制符号   w 添加连线，将器件引脚连接   v 可以给器件添加值，比如电阻阻值，电容容值等   p 可以打开电源选择窗口，选择并添加电源符号   g 可">
+<meta property="og:description" content="四旋翼飞控学习路线-新手向   初识飞控 四旋翼飞控的核心是对控制算法的编程实现以及调试，飞控的基本目的是在无人介入的情况下控制四个电机的输出从而保持飞行器的稳定飞行。它有着以下特点：  **门槛极高：**准确的说飞控并不适合新手（指什么都不会）用来入门，在新手尝试的过程中出现各种各样奇怪的问题是不可避免的，而底层飞控系统的容错性近乎为0，即一出问题几乎不可避免的要炸鸡。轻则设备报废，重则血肉模">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-29T03:38:48.000Z">
-<meta property="article:modified_time" content="2021-10-29T04:00:17.962Z">
+<meta property="og:image" content="https://mcflywzx.github.io/.io//%E7%BA%A2%E5%A4%96%E5%B0%8F%E8%BD%A6.jpg">
+<meta property="og:image" content="https://mcflywzx.github.io/.io//%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6.jpg">
+<meta property="article:published_time" content="2021-11-15T11:08:06.000Z">
+<meta property="article:modified_time" content="2021-11-15T11:12:17.016Z">
 <meta property="article:author" content="Mcfly">
-<meta property="article:tag" content="PCB工具使用">
+<meta property="article:tag" content="SQ飞控实验室">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mcflywzx.github.io/.io//%E7%BA%A2%E5%A4%96%E5%B0%8F%E8%BD%A6.jpg">
   
-  <title>KiCAD使用小技巧 - Mcfly的个人站</title>
+  <title>四旋翼飞控学习路线-新手向 - Mcfly的个人站</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -203,7 +206,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="KiCAD使用小技巧">
+            <span class="h2" id="subtitle" title="四旋翼飞控学习路线-新手向">
               
             </span>
 
@@ -213,8 +216,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-29 11:38" pubdate>
-        2021年10月29日 中午
+      <time datetime="2021-11-15 19:08" pubdate>
+        2021年11月15日 晚上
       </time>
     </span>
   
@@ -224,7 +227,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      342 字
+      1.9k 字
     </span>
   
 
@@ -233,7 +236,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      6 分钟
     </span>
   
 
@@ -270,104 +273,53 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">KiCAD使用小技巧</h1>
+            <h1 style="display: none">四旋翼飞控学习路线-新手向</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年10月29日 中午
+                  本文最后更新于：2021年11月15日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="快速操作"><a class="markdownIt-Anchor" href="#快速操作"></a> 快速操作</h1>
-<h2 id="快速放置递增网络标签"><a class="markdownIt-Anchor" href="#快速放置递增网络标签"></a> 快速放置递增网络标签</h2>
-<p><code>L</code>放置网络标签 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> <code>insert</code>按一定规则重复上次操作</p>
-<h2 id="差分网络"><a class="markdownIt-Anchor" href="#差分网络"></a> 差分网络</h2>
-<p>网络标签加上后缀<code>_N</code>和<code>_P</code>即可</p>
-<h1 id="快捷键"><a class="markdownIt-Anchor" href="#快捷键"></a> 快捷键</h1>
-<h2 id="原理图"><a class="markdownIt-Anchor" href="#原理图"></a> 原理图</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">快捷键</th>
-<th style="text-align:center">功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">a</td>
-<td style="text-align:center">可以添加元器件符号，第一次会加载符号库</td>
-</tr>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:center">复制符号</td>
-</tr>
-<tr>
-<td style="text-align:center">w</td>
-<td style="text-align:center">添加连线，将器件引脚连接</td>
-</tr>
-<tr>
-<td style="text-align:center">v</td>
-<td style="text-align:center">可以给器件添加值，比如电阻阻值，电容容值等</td>
-</tr>
-<tr>
-<td style="text-align:center">p</td>
-<td style="text-align:center">可以打开电源选择窗口，选择并添加电源符号</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:center">可以拖拽器件，过程中连线不会断开</td>
-</tr>
-<tr>
-<td style="text-align:center">m</td>
-<td style="text-align:center">移动会改变器件的位置并且连线会断开</td>
-</tr>
-<tr>
-<td style="text-align:center">x / y</td>
-<td style="text-align:center">分别按照x或y轴镜像符号</td>
-</tr>
-<tr>
-<td style="text-align:center">r</td>
-<td style="text-align:center">符号沿着中心点顺时针旋转90度</td>
-</tr>
-<tr>
-<td style="text-align:center">e</td>
-<td style="text-align:center">编辑元器件的一些符号属性</td>
-</tr>
-<tr>
-<td style="text-align:center">f</td>
-<td style="text-align:center">鼠标在元件上，编辑单个元器件的封装库</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:center">用于添加网络标签</td>
-</tr>
-<tr>
-<td style="text-align:center">Insert</td>
-<td style="text-align:center">按照一定规则重复最后一次操作项</td>
-</tr>
-<tr>
-<td style="text-align:center">Shift+鼠标框选</td>
-<td style="text-align:center">块复制</td>
-</tr>
-<tr>
-<td style="text-align:center">q</td>
-<td style="text-align:center">添加不连接标志</td>
-</tr>
-<tr>
-<td style="text-align:center">Ctrl+f</td>
-<td style="text-align:center">查找</td>
-</tr>
-<tr>
-<td style="text-align:center">Ctrl+z</td>
-<td style="text-align:center">撤回</td>
-</tr>
-<tr>
-<td style="text-align:center">Esc</td>
-<td style="text-align:center">停止正在进行的任何命令并返回正常指针模式</td>
-</tr>
-</tbody>
-</table>
+              <h2 id="四旋翼飞控学习路线-新手向"><a class="markdownIt-Anchor" href="#四旋翼飞控学习路线-新手向"></a> 四旋翼飞控学习路线-新手向</h2>
+<hr>
+<h3 id="初识飞控"><a class="markdownIt-Anchor" href="#初识飞控"></a> 初识飞控</h3>
+<p>四旋翼飞控的核心是对控制算法的编程实现以及调试，飞控的基本目的是在无人介入的情况下控制四个电机的输出从而保持飞行器的稳定飞行。它有着以下特点：</p>
+<ol>
+<li>**门槛极高：**准确的说飞控并不适合新手（指什么都不会）用来入门，在新手尝试的过程中出现各种各样奇怪的问题是不可避免的，而底层飞控系统的容错性近乎为0，即一出问题几乎不可避免的要炸鸡。轻则设备报废，重则血肉模糊，这都是新手不可承受之重。</li>
+<li>**需要对飞行器的原理有着足够的了解：**这个很好理解，你要控制一架飞机，可你连这架飞机是如何飞起来的都不了解，谈何控制。这需要有过航拍或者穿越机的经验至少也要飞过模拟器或者玩过飞行类的游戏。</li>
+<li>**系统工程性：**底层飞控理论属于控制科学的内容，但这并不意味着其它学科的同学就不能学习和研制飞控，事实上即便是控制科学的同学也未必能轻松上手，因为理论对应到代码里也就那么几行，但是实践起来我们还有大量的工作要做。比如对单片机控制器的编程，传感器与执行器的使用，实际参数调试和debug等等。</li>
+<li>**平台性：**飞控是一个平台，一旦我们构建好了这个平台，我们就可以随心所欲地在这上面增加我们想要的内容。如复杂的通信协议，远程视频传输——航拍，无人机自主任务系统，等等。</li>
+</ol>
+<p>综上所述，学习四旋翼飞控门槛较高，需要较多的前置知识。但是与此同时也对我们的学科学习有着很强的辅助作用，对我们的就业也能提供一定帮助。</p>
+<hr>
+<h3 id="入门控制"><a class="markdownIt-Anchor" href="#入门控制"></a> 入门控制</h3>
+<p>学习并实践控制算法在入门时要捡软柿子捏，不能一来就整高难度的。这里我推荐先从简单的红外小车做起，一辆简单的红外小车如下图：</p>
+<p><img src="/.io//%E7%BA%A2%E5%A4%96%E5%B0%8F%E8%BD%A6.jpg" srcset="/img/loading.gif" lazyload alt></p>
+<p>这辆红外小车由两个红外传感器、两个电机、TB6612FNG电机驱动板、arduino单片机控制板和电源模块构成。红外传感器在这里能够向地面发射一束红外光并感知反射光的强度，而不同颜色的地面反射能力不同。红外传感器将检测到的数值传递给单片机控制板，单片机经过你编写的控制处理算法来输出电机转速（PWM信号）给电机驱动板，再由电机驱动板控制输出电压给电机。单片机控制算法用c语言描述一段伪代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//infraRedRight和infraRedLeft为检测到的红外数值，假设数值越低代表地面越黑</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">motorControl</span><span class="hljs-params">(<span class="hljs-keyword">float</span> speed, <span class="hljs-keyword">float</span> infraRedRight, <span class="hljs-keyword">float</span> infraRedLeft)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">float</span> error = infraRedRight - infraRedLeft;<br>    setRightMotorOut(speed - error);<br>    setLeftMotorOut(speed + error);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以看到核心的控制逻辑比较简单，但是你还要实现这些代码里的其它部分，总的来说对新手还是个不小的挑战。</p>
+<p>实现这个基础的小车后你就可以用更多的设备来武装你的小车，如超声波，摄像头，机械臂等。这就不在我们今天的讨论范围之内了。</p>
+<hr>
+<h3 id="上手控制"><a class="markdownIt-Anchor" href="#上手控制"></a> 上手控制</h3>
+<p>在有了一定经验之后你就可以尝试更高难度的控制系统了，二轮平衡车就是一个很好的例子，如下图就是一个经典的平衡车：</p>
+<p><img src="/.io//%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6.jpg" srcset="/img/loading.gif" lazyload alt></p>
+<p>平衡车中的重点是姿态传感器，如MPU6050等，你可以通过姿态传感器来获取小车当前的倾斜情况，并作出相应的动作使小车平衡。这里就不能使用简单的比例控制器了(<code>out = bais + expect - error</code>)，必须使用PID控制器或者其它更复杂的控制器，感兴趣的朋友可以深入搜索，这里就不继续展开了。</p>
+<hr>
+<h3 id="入门飞控"><a class="markdownIt-Anchor" href="#入门飞控"></a> 入门飞控</h3>
+<p>做到这里，你已经可以实践研制飞控了，你需要了解四旋翼飞机控制的机理，慎重地选择飞行动力设备，你需要知道电调ESC是什么，2212电机2208电机等的区别，1S、2S、3S电池分别指的是什么，遥控器和单片机如何通信（事实上包括笔者在内应该有许多朋友刚开始是不打算使用成品遥控器的，搞电子的，什么都想造。实际上遥控器和单片机通信相当简单，而且安全性和操控性都非常优秀，入门时还是推荐使用成平遥控器。<em>千万别想着用串口助手来遥控，这是绝对的自杀行为</em>）、如何进行姿态解算和滤波。然后像前面一样搭建你的四旋翼测试机。另外在测试时注意将飞机固定在调试架上，确保安全，还有许多安全措施你需要了解。</p>
+<hr>
+<h3 id="深入开发"><a class="markdownIt-Anchor" href="#深入开发"></a> 深入开发</h3>
+<p>当你的第一架四旋翼无人机起飞的时候，你的基础平台搭建就已经宣告成功了，在这之后和小车一样，你可以给你的飞机增加设备，如摄像头、激光雷达、GPS定位等等。你可以自定义你的无人机并朝着一个实际的领域研究了，由于笔者还刚到这个层次，在这也无法提出更多的建议。就笔者而言有以下几个热点：</p>
+<ol>
+<li>无人机SLAM（即时定位与地图构建）</li>
+<li>无人机多机编队协同</li>
+<li>无人机效率</li>
+</ol>
+<p>以上内容肯定不够全面，还请大家自行发掘。当然热点再多也好，最重要的是把一个深入的领域做好，这样才会有长足的进步。</p>
+<hr>
+<p>2021-10-3</p>
 
             </div>
             <hr>
@@ -377,7 +329,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">学习路线</a>
                     
                   </div>
                 
@@ -385,7 +337,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/PCB%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">PCB工具使用</a>
+                      <a class="hover-with-bg" href="/tags/SQ%E9%A3%9E%E6%8E%A7%E5%AE%9E%E9%AA%8C%E5%AE%A4/">SQ飞控实验室</a>
                     
                   </div>
                 
@@ -402,18 +354,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/15/SQ%E9%A3%9E%E6%8E%A7%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%BB%BA%E8%AE%BE/%E5%9B%9B%E6%97%8B%E7%BF%BC%E9%A3%9E%E6%8E%A7%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF-%E6%96%B0%E6%89%8B%E5%90%91/%E5%9B%9B%E6%97%8B%E7%BF%BC%E9%A3%9E%E6%8E%A7%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF-%E6%96%B0%E6%89%8B%E5%90%91/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">四旋翼飞控学习路线-新手向</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/28/BujiUAV%E9%A1%B9%E7%9B%AE/BujiUAV%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E6%9D%90%E6%96%99/">
-                        <span class="hidden-mobile">BujiUAV前期准备材料</span>
+                      <a href="/2021/10/29/PCB/KiCAD%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+                        <span class="hidden-mobile">KiCAD使用小技巧</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -438,7 +384,7 @@
         var options = Object.assign(
           {"clientID":"d33105868b989b7f941f","clientSecret":"0bd6575e663566c980fee7eae3940aee6ce2ecde","repo":"blogTalk","owner":"McflyWzx","admin":["McflyWzx"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '89e985b5747ae48c0d15d1af280e132a'
+            id: '01d14332a080987d72108235c0a578fe'
           }
         )
         var gitalk = new Gitalk(options);
