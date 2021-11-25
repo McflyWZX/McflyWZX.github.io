@@ -36,7 +36,7 @@
 <meta property="og:description" content="一些Linux的基本操作和知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-27T11:14:13.000Z">
-<meta property="article:modified_time" content="2021-10-28T12:54:55.361Z">
+<meta property="article:modified_time" content="2021-11-16T18:01:01.770Z">
 <meta property="article:author" content="Mcfly">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      521 字
+      630 字
     </span>
   
 
@@ -274,7 +274,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年10月28日 晚上
+                  本文最后更新于：2021年11月17日 凌晨
                 
               </p>
             
@@ -310,7 +310,10 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ls -l   <span class="hljs-comment">#列出当前文件夹下所有文件等的权限</span><br><span class="hljs-comment">#out -&gt; drwxrwxr-x 2 mcfly mcfly 4096 10月 22 21:37 new</span><br>sudo chmod 271 xxx   <span class="hljs-comment">#以八进制设置xxx的三组权限</span><br></code></pre></td></tr></table></figure>
 <h3 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">pwd</span>				<span class="hljs-comment">#打印当前工作目录</span><br>mkdir			<span class="hljs-comment">#建立文件夹</span><br>touch			<span class="hljs-comment">#建立空白文件</span><br>rm				<span class="hljs-comment">#删除文件，-r参数删除文件夹，-rf以递归的方式删除文件夹及其文件</span><br>chmod			<span class="hljs-comment">#文件权限修改命令</span><br>find -name xxx	<span class="hljs-comment">#查找文件</span><br>mv				<span class="hljs-comment">#移动文件或修改文件名</span><br>ctrl c          <span class="hljs-comment">#结束当前进程</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">pwd</span>				<span class="hljs-comment">#打印当前工作目录</span><br>mkdir			<span class="hljs-comment">#建立文件夹</span><br>touch			<span class="hljs-comment">#建立空白文件</span><br>rm				<span class="hljs-comment">#删除文件，-r参数删除文件夹，-rf以递归的方式删除文件夹及其文件</span><br>chmod			<span class="hljs-comment">#文件权限修改命令</span><br>find -name xxx	 <span class="hljs-comment">#查找文件</span><br>mv				<span class="hljs-comment">#移动文件或修改文件名</span><br>ctrl c           <span class="hljs-comment">#结束当前进程</span><br>cat 			<span class="hljs-comment">#命令用于连接文件并打印到标准输出设备上。</span><br></code></pre></td></tr></table></figure>
+<hr>
+<h2 id="疑难杂症"><a class="markdownIt-Anchor" href="#疑难杂症"></a> 疑难杂症</h2>
+<p>出现<code>E: 错误，pkgProblemResolver::Resolve 发生故障，这可能是有软件包被要求保持现状的缘故。</code>时，可以安装aptitude来安装要安装的包</p>
 <hr>
 <h2 id="ftp"><a class="markdownIt-Anchor" href="#ftp"></a> FTP</h2>
 <h3 id="特性"><a class="markdownIt-Anchor" href="#特性"></a> 特性</h3>
