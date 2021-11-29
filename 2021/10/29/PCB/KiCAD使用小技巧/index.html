@@ -37,7 +37,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1728837/201907/1728837-20190701160546326-1557641364.png">
 <meta property="article:published_time" content="2021-10-29T03:38:48.000Z">
-<meta property="article:modified_time" content="2021-11-29T15:41:02.898Z">
+<meta property="article:modified_time" content="2021-11-29T15:43:44.178Z">
 <meta property="article:author" content="Mcfly">
 <meta property="article:tag" content="PCB工具使用">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      897 字
+      952 字
     </span>
   
 
@@ -285,7 +285,8 @@
 <p>lc_lib里带圆角的封装全挂了，仔细查看.mod，原版本代码：</p>
 <p><code>(fp_arc (center 0.495 0.23) (end 0.495 0.45) (angle -90.0) (layer F.SilkS) (width 0.2))</code>，新版本怎不能使用<code>center</code>，新版本写法：</p>
 <p><code>(fp_arc (start -1.535 -0.39) (mid -1.417843 -0.672843) (end -1.135 -0.79) (layer &quot;F.SilkS&quot;) (width 0.2) (tstamp 980e53ea-7d3f-426f-b014-a2ad45045098))</code></p>
-<p>坏消息是这显然手动转不了，好消息是新版本的PCB编辑器可以打开旧版本PCB，然后已经放置的元件还是可以正常显示，只需要再导出封装到原有库就OK了</p>
+<p>坏消息是这显然手动转不了，好消息是新版本的PCB编辑器可以打开旧版本PCB，然后已经放置的元件还是可以正常显示，只需要再导出封装到原有库就OK了。</p>
+<p>新版本非常喜人，原理图里可以显示中文了（包括封装编辑器），效果很好，PCB Edit里可以按照网络类来高亮了。</p>
 <h1 id="快速操作"><a class="markdownIt-Anchor" href="#快速操作"></a> 快速操作</h1>
 <h2 id="快速放置递增网络标签"><a class="markdownIt-Anchor" href="#快速放置递增网络标签"></a> 快速放置递增网络标签</h2>
 <p><code>L</code>放置网络标签 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> <code>insert</code>按一定规则重复上次操作</p>
